@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { BooksActions, BooksApiActions } from './State/books.actions';
 import { Observable } from 'rxjs';
 import { Book } from './Models/book.model';
+import { selectBookCollection, selectBooks } from './State/books.selectors';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,10 @@ import { Book } from './Models/book.model';
 export class AppComponent {
   title = 'ngrx-walkthrough-standalone';
 
-  books$:Observable<ReadonlyArray<Book>>=this.store.select('books');
-  collection$:Observable<ReadonlyArray<string>>=this.store.select('collection');
+  books$:Observable<ReadonlyArray<Book>>=this.store.select(selectBooks);
+  collection$:Observable<ReadonlyArray<Book>>=this.store.select(selectBookCollection);
 
-  constructor(private store: Store<{books: ReadonlyArray<Book>, collection: ReadonlyArray<string>}>) {     
+  constructor(private store: Store/*<{books: ReadonlyArray<Book>, collection: ReadonlyArray<string>}>*/) {     
   }
 
   ngOnInit() {

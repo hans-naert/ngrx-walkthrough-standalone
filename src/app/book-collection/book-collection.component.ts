@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { Book } from '../Models/book.model';
+
 @Component({
   selector: 'app-book-collection',
   standalone: true,
@@ -10,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class BookCollectionComponent {
 
-  @Input() book_ids: ReadonlyArray<string>=[];
+  @Input() books: ReadonlyArray<Book>=[];
   @Output() remove= new EventEmitter<string>();
 
 }
