@@ -1,3 +1,3 @@
-<app-book-list></app-book-list>
-<app-book-collection></app-book-collection>
+<app-book-list [books]="(books$ | async)!" (add)="add($event)"></app-book-list>
+<app-book-collection [book_ids]="(collection$ |async)!" (remove)="remove($event)"></app-book-collection>
 <router-outlet></router-outlet>

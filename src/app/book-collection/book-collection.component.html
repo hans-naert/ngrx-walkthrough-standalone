@@ -1,1 +1,8 @@
 <p>book-collection works!</p>
+<p>book-list</p>
+<ul>
+    @for (book_id of book_ids; track book_id)
+    {
+    <li>{{ book_id }} <button (click)="remove.emit(book_id)">REMOVE</button> </li>
+    }
+</ul>

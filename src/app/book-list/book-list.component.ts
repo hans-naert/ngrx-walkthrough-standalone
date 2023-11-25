@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Book } from '../Models/book.model';
 
 @Component({
   selector: 'app-book-list',
@@ -10,4 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class BookListComponent {
 
+  @Input() books: ReadonlyArray<Book>=[];
+  @Output() add = new EventEmitter<string>();
+  
 }
