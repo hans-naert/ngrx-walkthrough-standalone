@@ -4,6 +4,8 @@ import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Book } from '../models/books.model';
 import { BooksApiActions } from '../store/books.actions';
+import { selectBooks, selectBookCollection } from '../store/books.selectors';
+
 
 @Component({
   selector: 'app-root',
@@ -15,10 +17,10 @@ import { BooksApiActions } from '../store/books.actions';
 export class AppComponent {
   title = 'ngrx-walkthrough-standalone';
 
-  books$ = this.store.select('books');
-  collection$ = this.store.select('collection');
+  books$ = this.store.select(selectBooks);
+  collection$ = this.store.select(selectBookCollection);
 
-  constructor(private store: Store<{books : ReadonlyArray<Book>, collection:ReadonlyArray<string>}>) {
+  constructor(private store: Store) {
     this.store.dispatch(BooksApiActions.retrievedBookList({books: [{id: '1', volumeInfo: {title: 'Book 1', authors: ['Author 1']}},{id: '2', volumeInfo: {title: 'Book 2', authors: ['Author 1']}}]}));
   }
 }
