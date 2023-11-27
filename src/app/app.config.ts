@@ -7,7 +7,8 @@ import { provideStore } from '@ngrx/store';
 import { provideState } from '@ngrx/store';
 import { booksReducer } from '../store/books.reducer';
 import { collectionReducer } from '../store/collection.reducer';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), provideStore(), provideState({name:'books', reducer: booksReducer}), provideState({name:'collection', reducer: collectionReducer})]
+  providers: [provideRouter(routes), provideAnimations(), provideStore(), provideState({name:'books', reducer: booksReducer}), provideState({name:'collection', reducer: collectionReducer}), provideHttpClient()]
 };

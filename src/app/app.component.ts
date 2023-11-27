@@ -5,12 +5,14 @@ import { Store } from '@ngrx/store';
 import { Book } from '../models/books.model';
 import { BooksApiActions } from '../store/books.actions';
 import { selectBooks, selectBookCollection } from '../store/books.selectors';
-
+import { BooksService } from './services/books.service';
+import { MatButtonModule } from '@angular/material/button';
+import { BooksActions } from '../store/books.actions';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, MatButtonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -20,7 +22,13 @@ export class AppComponent {
   books$ = this.store.select(selectBooks);
   collection$ = this.store.select(selectBookCollection);
 
-  constructor(private store: Store) {
-    this.store.dispatch(BooksApiActions.retrievedBookList({books: [{id: '1', volumeInfo: {title: 'Book 1', authors: ['Author 1']}},{id: '2', volumeInfo: {title: 'Book 2', authors: ['Author 1']}}]}));
+  constructor(private store: Store, private booksService: BooksService) {
+    this.booksService.getBooks().subscribe((books) =>
+    this.store.dispatch(BooksApiActions.retrievedBookList({ books }))
+  );
+  }
+
+  add( bookId: string) {
+    this.store.dispatch(BooksActions.addBook({ bookId }));
   }
 }

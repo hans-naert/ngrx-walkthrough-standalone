@@ -2,6 +2,14 @@
 {
   <div class="book">
     <h2>{{book.volumeInfo.title}}</h2>
+    <button mat-raised-button color="primary" (click)="add(book.id)">Add</button>
+   </div>
+}
+<h1>My collection</h1>
+@for (book of (collection$|async); track book?.id)
+{
+  <div class="book">
+    <h2>{{book.volumeInfo.title}}</h2>
    </div>
 }
 <router-outlet></router-outlet>
